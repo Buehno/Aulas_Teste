@@ -52,12 +52,14 @@
         </tr>
       </thead>
       <tbody class="table-group-divider">
+        {%for New in Candidate%}
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>{{New.coordenatorCandidate}}</td>
+          <td>{{New.candidateName}}</td>
+          <td>{{New.CurseCandidate}}</td>
           <td><a href="">Imprimir</a></td>
         </tr>
+        {%endfor%}
       </tbody>
     </table>
   </body>
