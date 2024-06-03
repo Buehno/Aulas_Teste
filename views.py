@@ -8,7 +8,8 @@ from main import db, app
 def home():
     if 'User_Only' not in session or session['User_Only'] == None:
         return redirect('Login')
-    return render_template('Index.html',)
+    lista = Candidates.query.order_by(Candidates.id_candidate)
+    return render_template('Index.html', Candidate = lista )
 #rota para ir até a tela de cadastrar um candidato
 @app.route("/Candidate")
 def registerOne():
@@ -26,26 +27,26 @@ def Add():
     Candidate = Candidates.query.filter_by(candidateName = name).first()
     if Candidate:
         flash("Candidato ja esta Cadastrado!")
-        return redirect("/")
+        return redirect(url_for('home'))
     newcandidate = Candidates(candidateName = name, curseCandidate =  curse,  testName =  test, coordenatorCandidate =  coordenator )
     db.session.add(newcandidate)
     db.session.commit()
-    return redirect('/')
+    return redirect(url_for('home'))
 
 @app.route('/Login')
 def Login():
     return render_template('login.html')
 @app.route('/autenticate', methods=['POST',])
 def Autenticate():
-    user =  Usuarios.query.filter_by(mail =  request.form['txtLogin']).first()
-    if user:
-        if  request.form['txtSenha'] == Usuarios.passW:
-            session['User_Only'] = user
+    usuario =  Usuarios.query.filter_by(mail =  request.form['txtLogin']).first()
+    if usuario:
+        if  request.form['txtSenha'] == usuario.passW:
+            session['User_Only'] = usuario.name_user
             flash("Usuario Logado")
-            return redirect('home')
+            return redirect(url_for('home'))
         else:
             flash('senha Incorreta!')
-            return redirect('Login')
+            return redirect(url_for('Login'))
     else:
         flash("Usuario/Senha Incorreta!")
         return render_template('login.html')
@@ -53,6 +54,6 @@ def Autenticate():
 @app.route("/out")
 def  out ():
     session['User_Only'] = None
-    return redirect('Login')
+    return redirect(url_for('Login'))
 
 app.run(debug=True)

@@ -9,6 +9,15 @@
     <title>UniFecaf - Aula Teste</title>
   </head>
   <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class="list-unstyled" id="messages">
+      {% for category, message in messages %}
+        <li class="alert alert-success">{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
         <a class="navbar-brand" href="">uniFECAF</a>
@@ -38,11 +47,9 @@
                 >Cadastrar Candidato</a
               >
             </li>
+           
             <li class="nav-item">
-              <a class="nav-link" href="Exame.html">Concluidos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/sair">Sair</a>
+              <a class="nav-link" href="{{url_for('out')}}">Sair</a>
             </li>
           </ul>
         </div>

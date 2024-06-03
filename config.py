@@ -11,7 +11,7 @@ SQLALCHEMY_DATABASE_URI = (
         usuario='root',
         senha=senha,
         servidor='localhost',
-        database='Exame_Candidates'
+        database='exame_candidates'
     )
 )
 SQLALCHEMY_TRACK_MODIFICATIONS = False
