@@ -14,12 +14,14 @@ class Candidates(db.Model):
     curseCandidate = db.Column(db.String(50), nullable =  False)
     testName = db.Column(db.String(50), nullable =  False)
     coordenatorCandidate = db.Column(db.String(50), nullable =  False)
+    statusAula = db.Column(db.String(50))  # Adicionei a coluna statusAula
+    obcoord = db.Column(db.String(500))  # Adicionei a coluna obcoord
+    obacad = db.Column(db.String(500))  # Adicionei a coluna obacad
+    obconv = db.Column(db.String(500))  # Adicionei a coluna obconv
+    status1 = db.Column(db.String(50))  # Adicionei a coluna status1
+    status2 = db.Column(db.String(50))  # Adicionei a coluna status2
+    status3 = db.Column(db.String(50))  
+
     def __repr__(self):
             return '<name %r>' %self.name
 
-class exame(db.Model):
-    id_exame = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    note =db.Column(db.String(50), nullable =  False)
-    stats = db.Column(db.Boolean(), nullable =  False)
-    def __repr__(self):
-            return '<name %r>' %self.name
